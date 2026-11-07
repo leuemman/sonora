@@ -86,6 +86,7 @@ body[data-tab="settings"]{--amb1:#636366;--amb2:#0a84ff;--amb3:#30d158}
 .search svg{width:18px;height:18px;color:var(--text2);flex:none}
 .search input{flex:1;min-width:0;height:100%;background:none;border:0;outline:0;font-size:17px;-webkit-user-select:text;user-select:text}
 .search input::placeholder{color:var(--text3)}
+.search input::-webkit-search-cancel-button,.search input::-webkit-search-decoration{-webkit-appearance:none;display:none}
 .search .clr{width:30px;height:30px;border-radius:50%;display:none;place-items:center;color:var(--text2)}
 .search.has .clr{display:grid}
 .search .clr svg{width:17px;height:17px}
@@ -373,6 +374,74 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border:0;border-radiu
 .toast .ti svg{width:15px;height:15px}
 .toast span{overflow:hidden;text-overflow:ellipsis}
 
+/* suggestions */
+.sugg{position:absolute;left:16px;right:16px;z-index:30;border-radius:20px;overflow:hidden;display:none;--glass-a:.78;padding:4px 0;animation:sgIn .25s var(--ease)}
+.sugg.show{display:block}
+@keyframes sgIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.sugg button{display:flex;align-items:center;gap:12px;width:100%;padding:11px 16px;text-align:left;font-size:16px;position:relative}
+.sugg button+button::before{content:"";position:absolute;top:0;left:46px;right:0;border-top:.5px solid var(--sep)}
+.sugg button:active{background:var(--fill2)}
+.sugg svg{width:17px;height:17px;color:var(--text2);flex:none}
+.sugg b{font-weight:700}
+.sugg span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text2)}
+.sugg span b{color:var(--text)}
+.sugg i{font-style:normal;font-size:12px;color:var(--text3);flex:none}
+.why{padding:0 20px 10px;margin-top:-6px;font-size:13.5px;color:var(--text2)}
+.why b{color:var(--text);font-weight:600}
+
+/* lyrics */
+.lyr{display:none}
+.np.lyrmode .lyr{display:block;flex:1;min-height:180px;overflow-y:auto;margin:14px -6px 0;padding:10px 6px 40vh;scrollbar-width:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 70%,transparent 100%)}
+.np.lyrmode .lyr::-webkit-scrollbar{display:none}
+.np.lyrmode .slot{width:54%;margin:0 auto;border-radius:16px;flex:none}
+.np.lyrmode .np-meta{margin-top:12px}
+.np.lyrmode .queue{display:none!important}
+.lyr p{font-size:27px;font-weight:800;letter-spacing:-.5px;line-height:1.22;margin:0 0 18px;color:rgba(255,255,255,.32);transition:color .35s,transform .45s var(--spring),filter .35s;transform-origin:left center;cursor:pointer;filter:blur(.4px)}
+.lyr p.past{color:rgba(255,255,255,.5)}
+.lyr p.on{color:#fff;transform:scale(1.03);filter:none;text-shadow:0 0 24px rgba(255,255,255,.25)}
+.lyr.plain p{font-size:21px;color:rgba(255,255,255,.85);filter:none;cursor:default}
+.lyr .msg{font-size:17px;color:rgba(255,255,255,.7);text-align:center;padding:40px 10px;line-height:1.5}
+.lyr .src{font-size:12px;color:rgba(255,255,255,.4);margin-top:20px}
+.np-bot .round.on{background:#fff;color:#000}
+
+/* switch */
+.tg{width:51px;height:31px;border-radius:16px;background:var(--fill);position:relative;flex:none;transition:background .25s}
+.tg::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.2);transition:transform .35s var(--spring)}
+.tg.on{background:#30d158}.tg.on::after{transform:translateX(20px)}
+
+/* splash */
+#splash{position:fixed;inset:0;z-index:1000;background:#050507;display:none;transition:opacity .55s var(--ease),transform .7s var(--ease),filter .55s}
+#splash.run{display:block}
+#splash.out{opacity:0;transform:scale(1.12);filter:blur(10px);pointer-events:none}
+#splash svg{width:100%;height:100%}
+#splash .skip{position:absolute;right:18px;bottom:calc(var(--sab) + 22px);font-size:13px;font-weight:600;color:rgba(255,255,255,.55);padding:8px 14px;border-radius:16px;background:rgba(255,255,255,.08)}
+#splash g,#splash circle,#splash rect,#splash path,#splash text{transform-box:view-box}
+#splash .run-anim{animation-duration:4.2s;animation-timing-function:cubic-bezier(.45,0,.2,1);animation-fill-mode:both}
+.sp-logo{animation-name:spLogo;transform-origin:0 0}
+@keyframes spLogo{0%{transform:translate(195px,390px) scale(.55);opacity:0}9%{transform:translate(195px,390px) scale(1);opacity:1}34%{transform:translate(195px,390px) scale(1);opacity:1}42%{transform:translate(195px,390px) scale(.82);opacity:1}47%{transform:translate(195px,390px) scale(.4);opacity:0}100%{transform:translate(195px,390px) scale(.4);opacity:0}}
+.sp-word{animation-name:spWord}
+@keyframes spWord{0%,6%{opacity:0;transform:translateY(12px)}14%,32%{opacity:1;transform:none}40%,100%{opacity:0;transform:translateY(-8px)}}
+.sp-bar{transform-origin:var(--ox) 0;animation:spWave .9s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes spWave{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1.1)}}
+.sp-col{animation-name:spConv}
+@keyframes spConv{0%,32%{transform:translateX(0)}44%,100%{transform:translateX(var(--cx))}}
+.sp-bud{animation-name:spBud;transform-origin:0 0}
+@keyframes spBud{0%,38%{transform:translate(195px,390px) scale(.2) rotate(0);opacity:0}46%{transform:translate(195px,390px) scale(2.5) rotate(-6deg);opacity:1}54%{transform:translate(195px,388px) scale(2.5) rotate(4deg);opacity:1}68%{transform:translate(200px,372px) scale(.85) rotate(8deg);opacity:1}100%{transform:translate(200px,372px) scale(.85) rotate(8deg);opacity:1}}
+.sp-glow{animation-name:spGlow;transform-origin:195px 390px}
+@keyframes spGlow{0%,38%{opacity:0;transform:scale(.3)}46%{opacity:.9;transform:scale(1.2)}58%{opacity:0;transform:scale(1.8)}100%{opacity:0}}
+.sp-woman{animation-name:spWoman}
+@keyframes spWoman{0%,50%{opacity:0;transform:translateY(46px)}62%,100%{opacity:1;transform:none}}
+.sp-hand{animation-name:spHand;transform-origin:0 0}
+@keyframes spHand{0%,66%{transform:translate(150px,760px) rotate(-36deg);opacity:0}70%{opacity:1}74%{transform:translate(166px,414px) rotate(-14deg);opacity:1}77%{transform:translate(171px,404px) rotate(-12deg)}80%{transform:translate(166px,414px) rotate(-14deg)}88%{transform:translate(150px,540px) rotate(-26deg);opacity:1}100%{transform:translate(140px,800px) rotate(-36deg);opacity:0}}
+.sp-ring{animation-name:spRing;transform-origin:201px 371px;fill:none;stroke:#fff;stroke-width:2}
+@keyframes spRing{0%,76%{opacity:0;transform:scale(.4)}80%{opacity:.8}92%,100%{opacity:0;transform:scale(2.6)}}
+.sp-ring.r2{animation-name:spRing2}
+@keyframes spRing2{0%,81%{opacity:0;transform:scale(.4)}85%{opacity:.6}97%,100%{opacity:0;transform:scale(2.8)}}
+.sp-note{animation-name:spNote}
+@keyframes spNote{0%,78%{opacity:0;transform:translate(0,0) scale(.6)}84%{opacity:1}100%{opacity:0;transform:translate(var(--nx),-90px) scale(1.1) rotate(var(--nr))}}
+.sp-smile{animation-name:spSmile;transform-origin:279px 391px}
+@keyframes spSmile{0%,74%{transform:scaleX(1)}84%,100%{transform:scaleX(1.25) translateY(-1px)}}
+
 /* player host */
 #playerHost{position:fixed;z-index:-1;left:-9999px;top:0;width:10px;height:10px;overflow:hidden;background:#000;transition:border-radius .3s}
 #playerHost iframe,#playerHost #ytFrame{width:100%;height:100%;border:0;display:block}
@@ -384,6 +453,82 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border:0;border-radiu
 </style>
 </head>
 <body data-tab="music">
+<div id="splash" class="run" data-act="skipSplash">
+<svg viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent)"/><stop offset=".55" stop-color="#b03cff"/><stop offset="1" stop-color="#5e2bff"/></linearGradient>
+    <radialGradient id="spbg" cx=".5" cy=".46" r=".6"><stop offset="0" stop-color="#3a1030"/><stop offset=".55" stop-color="#14081c"/><stop offset="1" stop-color="#050507"/></radialGradient>
+    <radialGradient id="spglowG"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".4" style="stop-color:var(--accent)" stop-opacity=".45"/><stop offset="1" style="stop-color:var(--accent)" stop-opacity="0"/></radialGradient>
+    <radialGradient id="spot" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--accent)" stop-opacity=".35"/><stop offset="1" style="stop-color:var(--accent)" stop-opacity="0"/></radialGradient>
+    <linearGradient id="budG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#eceef2"/><stop offset="1" stop-color="#c7cad1"/></linearGradient>
+    <linearGradient id="topG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--accent)"/><stop offset="1" stop-color="#5e2bff"/></linearGradient>
+    <linearGradient id="skinG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a4a2e"/><stop offset="1" stop-color="#9a6443"/></linearGradient>
+  </defs>
+  <rect width="390" height="844" fill="url(#spbg)"/>
+
+  <!-- femme (apparaît) -->
+  <g class="sp-woman run-anim">
+    <circle cx="205" cy="400" r="230" fill="url(#spot)"/>
+    <path d="M60 844 C70 650 130 566 200 552 C272 566 330 650 340 844 Z" fill="url(#topG)"/>
+    <path d="M60 844 C70 650 130 566 200 552 C272 566 330 650 340 844 Z" fill="#000" opacity=".12"/>
+    <path d="M176 462 L174 552 C186 566 214 566 226 552 L224 462 Z" fill="#6f4428"/>
+    <circle cx="146" cy="246" r="48" fill="#1b1412"/>
+    <path d="M138 392 C104 344 108 262 158 228 C200 200 262 210 284 252 C272 264 252 262 238 268 C202 268 170 300 164 352 C161 384 168 414 178 436 C158 430 144 412 138 392 Z" fill="#1b1412"/>
+    <path d="M152 362 C152 300 192 262 238 268 C264 272 278 296 280 322 L294 352 C298 360 292 366 284 366 L286 380 C288 386 282 390 280 392 L284 400 C282 410 272 416 264 418 C252 440 228 470 202 472 C172 474 152 430 152 362 Z" fill="url(#skinG)"/>
+    <path d="M160 300 C170 276 196 262 230 266 C200 270 178 290 170 318 Z" fill="#1b1412"/>
+    <ellipse cx="196" cy="372" rx="12" ry="18" fill="#6f4428"/>
+    <path d="M196 362 q-6 10 0 20" stroke="#4e2e1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M246 330 q11 7 22 0" stroke="#1b1412" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M244 314 q13 -7 26 -1" stroke="#1b1412" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path class="sp-smile run-anim" d="M271 390 q8 5 15 -1" stroke="#3d1c10" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="262" cy="356" r="9" fill="#ff6a8a" opacity=".25"/>
+  </g>
+
+  <!-- ondes et notes autour de l'oreille -->
+  <circle class="sp-ring run-anim" cx="201" cy="371" r="26"/>
+  <circle class="sp-ring r2 run-anim" cx="201" cy="371" r="26"/>
+  <text class="sp-note run-anim" x="214" y="350" fill="#fff" font-size="24" style="--nx:-26px;--nr:-14deg">♪</text>
+  <text class="sp-note run-anim" x="176" y="344" fill="#fff" font-size="20" style="--nx:-48px;--nr:12deg;animation-delay:.12s">♫</text>
+
+  <!-- halo de métamorphose -->
+  <circle class="sp-glow run-anim" cx="195" cy="390" r="100" fill="url(#spglowG)"/>
+
+  <!-- logo Sonora -->
+  <g class="sp-logo run-anim">
+    <rect x="-80" y="-80" width="160" height="160" rx="38" fill="url(#spg)"/>
+    <rect x="-80" y="-80" width="160" height="80" rx="38" fill="#fff" opacity=".1"/>
+    <g class="sp-col run-anim" style="--cx:56px"><rect class="sp-bar" x="-65" y="-22" width="18" height="44" rx="9" fill="#fff" style="--d:-.1s;transform-origin:0 0"/></g>
+    <g class="sp-col run-anim" style="--cx:28px"><rect class="sp-bar" x="-37" y="-36" width="18" height="72" rx="9" fill="#fff" style="--d:-.3s;transform-origin:0 0"/></g>
+    <g class="sp-col run-anim" style="--cx:0px"><rect class="sp-bar" x="-9" y="-52" width="18" height="104" rx="9" fill="#fff" style="--d:-.5s;transform-origin:0 0"/></g>
+    <g class="sp-col run-anim" style="--cx:-28px"><rect class="sp-bar" x="19" y="-36" width="18" height="72" rx="9" fill="#fff" style="--d:-.7s;transform-origin:0 0"/></g>
+    <g class="sp-col run-anim" style="--cx:-56px"><rect class="sp-bar" x="47" y="-22" width="18" height="44" rx="9" fill="#fff" style="--d:-.9s;transform-origin:0 0"/></g>
+  </g>
+  <text class="sp-word run-anim" x="195" y="530" text-anchor="middle" fill="#fff" font-size="32" font-weight="800" letter-spacing="1" font-family="-apple-system,BlinkMacSystemFont,Inter,sans-serif">Sonora</text>
+  <text class="sp-word run-anim" x="195" y="560" text-anchor="middle" fill="#fff" fill-opacity=".72" font-size="15" font-weight="500" font-style="italic" letter-spacing="2" font-family="-apple-system,BlinkMacSystemFont,Inter,sans-serif" style="animation-delay:.12s">by Leuemman</text>
+
+  <!-- écouteur (design original) -->
+  <g class="sp-bud run-anim">
+    <ellipse cx="-14" cy="2" rx="9" ry="8" fill="#2a2a30"/>
+    <path d="M-10 -12 C2 -24 26 -20 30 -2 C34 16 18 26 2 22 C-12 19 -20 4 -10 -12 Z" fill="url(#budG)"/>
+    <circle cx="12" cy="2" r="11" fill="url(#spg)"/>
+    <rect x="6.5" y="-1.5" width="2.4" height="7" rx="1.2" fill="#fff"/><rect x="10.8" y="-4" width="2.4" height="12" rx="1.2" fill="#fff"/><rect x="15.1" y="-1.5" width="2.4" height="7" rx="1.2" fill="#fff"/>
+    <path d="M-4 -14 C6 -20 20 -18 26 -9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>
+  </g>
+
+  <!-- main (geste) -->
+  <g class="sp-hand run-anim">
+    <path d="M4 30 L-34 300 L12 306 L40 36 Z" fill="#8a5636"/>
+    <path d="M-30 250 L-44 330 L22 338 L20 258 Z" fill="url(#topG)"/>
+    <rect x="-14" y="-6" width="10" height="32" rx="5" fill="#9a6443" transform="rotate(-30 -9 20)"/>
+    <rect x="0" y="-44" width="10" height="44" rx="5" fill="#9a6443"/>
+    <rect x="11" y="-50" width="10" height="50" rx="5" fill="#9a6443"/>
+    <rect x="22" y="-47" width="10" height="47" rx="5" fill="#9a6443"/>
+    <rect x="33" y="-38" width="9" height="38" rx="4.5" fill="#9a6443"/>
+    <rect x="-2" y="-10" width="45" height="52" rx="18" fill="#9a6443"/>
+  </g>
+</svg>
+<button class="skip" data-act="skipSplash">Passer</button>
+</div>
 <div class="ambient"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 
 <div id="app">
@@ -392,6 +537,7 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border:0;border-radiu
     <div class="head"><div><div class="sub" id="greet">Bonjour</div><div class="lt">Musique</div></div>
       <button class="round glass" data-act="tab" data-tab="settings" aria-label="Réglages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button></div>
     <form class="search glass" data-kind="music"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" enterkeyhint="search" placeholder="Artistes, titres…" autocomplete="off"><button type="button" class="clr" aria-label="Effacer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm3.5 12.1-1.4 1.4L12 13.4l-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1Z"/></svg></button></form>
+    <div class="sugg glass" id="sugg-music"></div>
     <div id="music-body"></div>
   </section>
 
@@ -400,6 +546,7 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border:0;border-radiu
     <div class="head"><div><div class="sub">Regarde. Vibre.</div><div class="lt">Clips</div></div>
       <button class="round glass" data-act="tab" data-tab="settings" aria-label="Réglages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button></div>
     <form class="search glass" data-kind="clip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" enterkeyhint="search" placeholder="Rechercher un clip…" autocomplete="off"><button type="button" class="clr" aria-label="Effacer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm3.5 12.1-1.4 1.4L12 13.4l-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1 2.1 2.1Z"/></svg></button></form>
+    <div class="sugg glass" id="sugg-clip"></div>
     <div id="clips-body"></div>
   </section>
 
@@ -448,6 +595,7 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border:0;border-radiu
       <button class="round" data-act="npMenu" aria-label="Options"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
     </div>
     <div class="slot" id="npSlot" style="position:relative"><div class="hint" id="npHint"><span>Touche la vidéo pour lancer la lecture</span></div></div>
+    <div class="lyr" id="npLyr"></div>
     <div class="np-meta">
       <div class="mm"><div class="t" id="npT"></div><div class="a" id="npA"></div></div>
       <button class="round heart" data-act="favCurrent" id="npHeart" aria-label="Favori"></button>
@@ -462,6 +610,7 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border:0;border-radiu
     </div>
     <div class="np-bot">
       <button class="round" data-act="addPlCurrent" aria-label="Ajouter à une playlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h12M3 12h12M3 18h8M18 14v8M14 18h8"/></svg></button>
+      <button class="round" data-act="lyrics" id="npLyrBtn" aria-label="Paroles"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-6l-5 4v-4H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Zm3.2 5.5c-1.3 0-2.2 1-2.2 2.2 0 1.1.8 2 1.9 2.1-.2.7-.7 1.2-1.4 1.5l.4.9c1.8-.6 3.3-2 3.3-4.2 0-1.5-.8-2.5-2-2.5Zm6 0c-1.3 0-2.2 1-2.2 2.2 0 1.1.8 2 1.9 2.1-.2.7-.7 1.2-1.4 1.5l.4.9c1.8-.6 3.3-2 3.3-4.2 0-1.5-.8-2.5-2-2.5Z"/></svg></button>
       <button class="round" data-act="watchClip" aria-label="Voir le clip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 4h11A2.5 2.5 0 0 1 18 6.5v1.7l2.9-2c.7-.5 1.6 0 1.6.8v10c0 .8-.9 1.3-1.6.8l-2.9-2v1.7a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 2 17.5v-11A2.5 2.5 0 0 1 4.5 4Z"/></svg></button>
       <button class="round" data-act="queue" id="npQBtn" aria-label="File d'attente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor"/><circle cx="3.5" cy="12" r="1" fill="currentColor"/><circle cx="3.5" cy="18" r="1" fill="currentColor"/></svg></button>
     </div>
@@ -660,6 +809,7 @@ function load(item){
     if(yt&&yt.loadVideoById)go();else ensureYT().then(go).catch(e=>toast(e.message));
   }
   addHist(item);syncUI();
+  if(S.lyrOpen)loadLyrics();
 }
 function isPlaying(){return P.item&&P.item.demo?P.fakePlaying:S.playing}
 function play(){if(!P.item)return;if(P.item.demo){if(P.fakeT>=(P.item.dur||0))P.fakeT=0;fakeStart();S.playing=true}else{try{yt.playVideo()}catch(e){}S.playing=true}syncUI()}
@@ -816,6 +966,7 @@ function renderMusic(){
     h+='</div>';b.innerHTML=h;syncUI();return;
   }
   // home
+  h+=forYouHTML();
   const recentPlayed=S.hist.filter(x=>x.kind==='music').slice(0,12);
   if(recentPlayed.length){const n=reg('mrecent',recentPlayed);h+=`<div class="sec"><div class="sh"><h2>Écoutés récemment</h2></div><div class="hs">${recentPlayed.map((it,i)=>sq(it,n,i)).join('')}</div></div>`}
   const favM=S.favs.filter(x=>x.kind==='music').slice(0,12);
@@ -843,6 +994,7 @@ function renderClips(){
   else if(S.trending){arr=S.trending;title='Tendances'}
   else{b.innerHTML=h+'<div class="spin"></div>';loadTrending();return}
   const n=reg('clist',arr);
+  if(!S.cRes){if(!S.forYouC&&topArtists().length)setTimeout(loadForYou,0);h+=forYouClipsHTML()}
   h+=`<div class="sec"><div class="sh"><h2>${esc(title)}</h2></div>`;
   if(!arr.length)h+=empty(I.search,'Aucun clip trouvé','Essaie un autre nom.');
   h+=arr.map((it,i)=>clipCard(it,n,i)).join('')+'</div>';
@@ -922,6 +1074,9 @@ function renderSettings(){
     <div class="swatches">${accents.map((a,i)=>`<button class="sw ${S.accent===i?'on':''}" style="background:linear-gradient(135deg,${a[0]},${a[1]});color:${a[0]}" data-act="accent" data-i="${i}" aria-label="Couleur ${i+1}"></button>`).join('')}</div>
     <div style="border-top:.5px solid var(--sep);margin:0 16px"></div>
     <div class="themes">${[['dark','Sombre'],['light','Clair'],['auto','Auto']].map(([v,l])=>`<button class="${S.theme===v?'on':''}" data-act="theme" data-v="${v}">${l}</button>`).join('')}</div>
+    <div style="border-top:.5px solid var(--sep);margin:0 16px"></div>
+    <button class="cell nl" data-act="toggleSplash"><span class="cl">Animation d’ouverture</span><span class="tg ${store.get('splash',true)?'on':''}"></span></button>
+    <button class="cell nl" data-act="replaySplash" style="border-top:.5px solid var(--sep)"><span class="cl" style="color:var(--accent)">Revoir l’animation</span></button>
   </div></div>
 
   <div class="group"><div class="gl">Région des tendances</div><div class="card glass">${[['CI','Côte d’Ivoire'],['FR','France'],['SN','Sénégal'],['CM','Cameroun'],['US','États-Unis']].map(([c,l])=>`<button class="cell nl" data-act="region" data-v="${c}"><span class="cl">${l}</span>${S.region===c?`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>`:''}</button>`).join('')}</div></div>
@@ -937,8 +1092,8 @@ function renderSettings(){
     <button class="cell" data-act="clearHist"><div class="ci" style="background:#ff9f0a">${I.clock}</div><span class="cl">Effacer l’historique</span></button>
     <button class="cell" data-act="clearCache"><div class="ci" style="background:#0a84ff">${I.globe}</div><span class="cl">Vider le cache des recherches</span></button>
     <button class="cell red" data-act="resetAll"><div class="ci" style="background:#ff453a">${I.trash}</div><span class="cl">Tout réinitialiser</span></button>
-  </div><div class="gf">Sonora utilise le lecteur officiel YouTube : la lecture nécessite Internet et s’arrête quand l’écran est verrouillé. Pour l’écoute hors ligne et en arrière-plan, YouTube propose YouTube Premium.</div></div>
-  <div style="text-align:center;color:var(--text3);font-size:13px;margin:26px 0 0">Sonora 1.0 · Conçue pour iPhone</div>`;
+  </div><div class="gf">Paroles fournies par LRCLIB (base communautaire), pour un usage personnel. Sonora utilise le lecteur officiel YouTube : la lecture nécessite Internet et s’arrête quand l’écran est verrouillé. Pour l’écoute hors ligne et en arrière-plan, YouTube propose YouTube Premium.</div></div>
+  <div style="text-align:center;color:var(--text3);font-size:13px;margin:26px 0 0">Sonora 1.1 · by Leuemman</div>`;
   const r=$('#glassR');const upd=()=>{const p=(r.value-8)/(80-8)*100;r.style.setProperty('--p',p+'%');$('#glassV').textContent=Math.round(p)+' %'};upd();
   r.addEventListener('input',()=>{S.glass=+r.value;applyLook();upd()});r.addEventListener('change',()=>store.set('glass',S.glass));
 }
@@ -958,7 +1113,7 @@ function renderQueue(){
   syncUI();
 }
 function openPlayer(){if(!P.item)return;if(S.mode==='clip'){openClip();return}S.npOpen=true;$('#npSheet').classList.add('open');renderQueue();syncUI()}
-function closePlayer(){S.npOpen=false;$('#npSheet').classList.remove('open');syncUI()}
+function closePlayer(){S.npOpen=false;$('#npSheet').classList.remove('open');syncUI();if(S.tab==='music'&&!S.mRes)setTimeout(renderMusic,350)}
 function openClip(){S.clipOpen=true;S.npOpen=false;$('#npSheet').classList.remove('open');renderClip();$('#cv').scrollTop=0;$('#clipSheet').classList.add('open');syncUI()}
 function closeClip(){S.clipOpen=false;$('#clipSheet').classList.remove('open');syncUI()}
 function renderClip(){
@@ -994,6 +1149,12 @@ document.addEventListener('click',e=>{
   if(a!=='menu'&&el.tagName!=='A')e.preventDefault();
   switch(a){
     case 'tab':setTab(el.dataset.tab);break;
+    case 'skipSplash':endSplash();break;
+    case 'sugg':hideSugg(el.dataset.kind);doSearch(el.dataset.kind,el.dataset.q);break;
+    case 'lyrics':toggleLyrics();break;
+    case 'lyrSeek':if(lyrState&&lyrState.lines&&lyrState.lines[i]){seek(lyrState.lines[i].t);if(!isPlaying())play()}break;
+    case 'toggleSplash':{const v=!store.get('splash',true);store.set('splash',v);el.querySelector('.tg').classList.toggle('on',v);toast(v?'Animation d’ouverture activée':'Animation d’ouverture désactivée');break}
+    case 'replaySplash':store.set('splash',true);location.reload();break;
     case 'playRow':{const it=L[i];if(!it)break;
       if(el.dataset.list==='queue'){S.qi=i;load(S.queue[i]);renderQueue();if(S.clipOpen){renderClip();$('#cv').scrollTop=0}break}
       if(it.kind==='clip'){const clipsOnly=L.filter(x=>x.kind==='clip');playQueue(clipsOnly,clipsOnly.indexOf(it),'clip')}
@@ -1038,7 +1199,7 @@ document.addEventListener('click',e=>{
     case 'region':S.region=el.dataset.v;store.set('region',S.region);S.trending=null;renderSettings();toast('Région mise à jour');break;
   }
 });
-function fromName(l){return {mres:S.mQ||'Recherche',mrecent:'Écoutés récemment',mfav:'Tes coups de cœur',mdemo:'Sélection du jour',mtrend:'Tendances',favs:'Favoris',hist:'Historique',pl:(S.pls.find(p=>p.id===S.openPl)||{}).name||'Playlist'}[l]||'Musique'}
+function fromName(l){return {mres:S.mQ||'Recherche',mrecent:'Écoutés récemment',mfav:'Tes coups de cœur',mdemo:'Sélection du jour',mtrend:'Tendances',mfy:'Pour toi',favs:'Favoris',hist:'Historique',pl:(S.pls.find(p=>p.id===S.openPl)||{}).name||'Playlist'}[l]||'Musique'}
 async function testKey(){
   if(!S.key){toast('Ajoute d’abord une clé');return}
   try{await api('videos',{part:'id',id:'jNQXAC9IVRw'});S.keyStatus='ok';toast('Clé valide — tout est prêt !')}
@@ -1062,6 +1223,141 @@ function swipeClose(sheet,scroller,close){
 }
 swipeClose($('#npSheet'),$('#np'),closePlayer);
 swipeClose($('#clipSheet'),$('#cv'),closeClip);
+
+/* ================= splash ================= */
+const splash=$('#splash');let splashTO;
+function endSplash(){if(!splash.classList.contains('run')||splash.classList.contains('out'))return;clearTimeout(splashTO);splash.classList.add('out');setTimeout(()=>splash.classList.remove('run','out'),700)}
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!store.get('splash',true)||reduce){splash.classList.remove('run');return}
+  if(location.hash!=='#splash-test')splashTO=setTimeout(endSplash,4150);
+})();
+
+/* ================= suggestions ================= */
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+let sgTimer=null, sgSeq=0, sgReq=0;
+function jsonp(url,ms=2500){return new Promise((res,rej)=>{const cb='__sg'+(++sgSeq);const s=document.createElement('script');const to=setTimeout(()=>{clean();rej(new Error('timeout'))},ms);function clean(){clearTimeout(to);delete window[cb];s.remove()}window[cb]=d=>{clean();res(d)};s.onerror=()=>{clean();rej(new Error('net'))};s.src=url+(url.includes('?')?'&':'?')+'callback='+cb;document.head.appendChild(s)})}
+function localSugg(q,kind){
+  const nq=norm(q);const out=[];const seen=new Set();
+  const push=(t,type)=>{const k=norm(t);if(!t||seen.has(k))return;if(nq&&!k.includes(nq))return;seen.add(k);out.push({t,type})};
+  (kind==='music'?S.recentM:S.recentC).forEach(t=>push(t,'recent'));
+  [...S.favs,...S.hist].forEach(it=>push(it.artist,'artist'));
+  if(nq)S.hist.forEach(it=>push(it.title,'title'));
+  return out.slice(0,nq?4:6);
+}
+async function remoteSugg(q){
+  if(!q||q.length<2)return [];
+  try{const d=await jsonp('https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&hl=fr&q='+encodeURIComponent(q));return (d&&d[1]||[]).map(x=>Array.isArray(x)?x[0]:x).filter(Boolean).slice(0,7)}catch(e){return []}
+}
+function hl(t,q){const i=norm(t).indexOf(norm(q));if(!q||i<0)return esc(t);return esc(t.slice(0,i))+'<b>'+esc(t.slice(i,i+q.length))+'</b>'+esc(t.slice(i+q.length))}
+async function updateSugg(kind){
+  const form=$(`form[data-kind="${kind}"]`),box=$('#sugg-'+kind),q=form.querySelector('input').value.trim();
+  if(document.activeElement!==form.querySelector('input')){box.classList.remove('show');return}
+  const my=++sgReq;let loc=localSugg(q,kind);
+  const draw=(rem)=>{
+    const seen=new Set(loc.map(x=>norm(x.t)));const r=(rem||[]).filter(t=>!seen.has(norm(t))).map(t=>({t,type:'web'}));
+    const all=[...loc,...r].slice(0,8);
+    if(!all.length){box.classList.remove('show');return}
+    const ic={recent:I.clock,artist:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',title:I.note,web:I.search};
+    const lab={recent:'Récent',artist:'Artiste',title:'Écouté',web:''};
+    box.innerHTML=all.map(x=>`<button data-act="sugg" data-kind="${kind}" data-q="${esc(x.t)}">${ic[x.type]}<span>${hl(x.t,q)}</span><i>${lab[x.type]}</i></button>`).join('');
+    box.style.top=(form.offsetTop+form.offsetHeight+6)+'px';box.classList.add('show');
+  };
+  draw();
+  if(q.length>=2&&!demoMode()){const rem=await remoteSugg(q);if(my!==sgReq)return;if(form.querySelector('input').value.trim()===q)draw(rem)}
+}
+function hideSugg(kind){const b=$('#sugg-'+kind);b&&b.classList.remove('show')}
+$$('form.search').forEach(f=>{const inp=f.querySelector('input'),kind=f.dataset.kind;
+  inp.addEventListener('input',()=>{clearTimeout(sgTimer);sgTimer=setTimeout(()=>updateSugg(kind),180)});
+  inp.addEventListener('focus',()=>updateSugg(kind));
+  inp.addEventListener('blur',()=>setTimeout(()=>hideSugg(kind),220));
+  f.addEventListener('submit',()=>hideSugg(kind));
+});
+
+/* ================= pour toi ================= */
+function topArtists(){
+  const c={};const add=(a,w)=>{if(!a||/^(artiste|various)/i.test(a))return;c[a]=(c[a]||0)+w};
+  S.hist.forEach((h,i)=>add(h.artist,i<10?2:1));S.favs.forEach(f=>add(f.artist,3));
+  return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
+}
+let fyLoading=false;
+async function loadForYou(){
+  if(fyLoading)return;const arts=topArtists();if(!arts.length)return;
+  fyLoading=true;
+  try{
+    const pick=arts.slice(0,2);const heard=new Set(S.hist.map(h=>h.id));
+    let lists;
+    if(demoMode()){lists=pick.map(a=>demoItems('music',a))}
+    else lists=await Promise.all(pick.map(a=>ytSearch(a,'music').catch(()=>[])));
+    const mix=[];const max=Math.max(...lists.map(l=>l.length));
+    for(let i=0;i<max;i++)lists.forEach(l=>{const it=l[i];if(it&&!mix.some(m=>m.id===it.id))mix.push(it)});
+    const fresh=mix.filter(it=>!heard.has(it.id));
+    S.forYou={because:pick,items:(fresh.length>=6?fresh:mix).slice(0,14),key:pick.join('|')};
+    if(!demoMode()){const cl=await ytSearch(pick[0],'clip').catch(()=>[]);S.forYouC={because:pick[0],items:cl.filter(it=>!heard.has(it.id)).slice(0,4),key:pick[0]}}
+    else S.forYouC={because:pick[0],items:demoItems('clip',pick[0]).slice(0,4),key:pick[0]};
+  }finally{fyLoading=false}
+  if(S.tab==='music'&&!S.mRes)renderMusic();if(S.tab==='clips'&&!S.cRes)renderClips();
+}
+function forYouHTML(){
+  const arts=topArtists();if(!arts.length)return '';
+  const key=arts.slice(0,2).join('|');
+  if(!S.forYou||S.forYou.key!==key){setTimeout(loadForYou,0);return S.forYou&&S.forYou.items.length?'':`<div class="sec"><div class="sh"><h2>Pour toi</h2></div><div class="hs">${Array.from({length:4},()=>'<div class="sq"><div class="art skel"></div></div>').join('')}</div></div>`}
+  if(!S.forYou.items.length)return '';
+  const n=reg('mfy',S.forYou.items);const b=S.forYou.because;
+  return `<div class="sec"><div class="sh"><h2>Pour toi</h2><button class="more" data-act="playAll" data-list="mfy">Tout lire</button></div><div class="why">Parce que tu écoutes <b>${esc(b[0])}</b>${b[1]?` et <b>${esc(b[1])}</b>`:''}</div><div class="hs">${S.forYou.items.map((it,i)=>sq(it,n,i)).join('')}</div></div>`;
+}
+function forYouClipsHTML(){
+  const f=S.forYouC;if(!f||!f.items.length)return '';
+  const n=reg('cfy',f.items);
+  return `<div class="sec"><div class="sh"><h2>Pour toi</h2></div><div class="why">Des clips de <b>${esc(f.because)}</b> et autour</div>${f.items.map((it,i)=>clipCard(it,n,i)).join('')}</div>`;
+}
+
+/* ================= paroles ================= */
+const lyrCache={};let lyrState=null;
+const DEMO_LYR=['La ville s’allume, je monte le son','Le plateau respire au rythme de mon cœur','On danse encore, personne ne rentre','Sous les lumières, tout devient plus doux','Lève les mains, laisse-toi porter','Cette nuit est à nous, elle ne finit pas','La lagune brille comme un miroir','Je chante ton nom jusqu’au matin','Oh oh, ne t’arrête pas','Oh oh, la musique nous tient','On danse encore, personne ne rentre','Cette nuit est à nous'];
+function parseLRC(t){const out=[];(t||'').split(/\r?\n/).forEach(line=>{const tags=[...line.matchAll(/\[(\d+):(\d+(?:\.\d+)?)\]/g)];const txt=line.replace(/\[[^\]]*\]/g,'').trim();tags.forEach(m=>out.push({t:+m[1]*60+ +m[2],l:txt}))});return out.sort((a,b)=>a.t-b.t).filter((x,i,a)=>x.l||(a[i+1]&&a[i+1].l))}
+async function fetchLyrics(it){
+  if(lyrCache[it.id])return lyrCache[it.id];
+  let res;
+  if(it.demo){const step=Math.max(5,(it.dur||180)/(DEMO_LYR.length+2));res={synced:DEMO_LYR.map((l,i)=>({t:4+i*step,l})),src:'démo'}}
+  else{
+    const art=(it.artist||'').replace(/\s*(official|officiel|vevo|music|tv)$/i,'').trim(), tit=(it.title||'').replace(/\s*(ft\.?|feat\.?).*$/i,'').trim();
+    const tryUrl=async u=>{try{const r=await fetch(u);if(!r.ok)return [];const j=await r.json();return Array.isArray(j)?j:[j]}catch(e){return null}};
+    let list=await tryUrl(`https://lrclib.net/api/search?track_name=${encodeURIComponent(tit)}&artist_name=${encodeURIComponent(art)}`);
+    if(list===null)return {err:'net'};
+    if(!list.length)list=await tryUrl(`https://lrclib.net/api/search?q=${encodeURIComponent(art+' '+tit)}`)||[];
+    const d=duration()||it.dur||0;
+    list.sort((a,b)=>((b.syncedLyrics?1:0)-(a.syncedLyrics?1:0))||(Math.abs((a.duration||0)-d)-Math.abs((b.duration||0)-d)));
+    const best=list.find(x=>x.syncedLyrics||x.plainLyrics);
+    if(!best)res={none:true};
+    else if(best.syncedLyrics&&(!d||Math.abs((best.duration||d)-d)<25))res={synced:parseLRC(best.syncedLyrics),src:'LRCLIB'};
+    else res={plain:(best.plainLyrics||best.syncedLyrics.replace(/\[[^\]]*\]/g,'')).trim(),src:'LRCLIB'};
+  }
+  lyrCache[it.id]=res;return res;
+}
+async function loadLyrics(){
+  const box=$('#npLyr'),it=P.item;if(!it)return;
+  lyrState={id:it.id,lines:null,cur:-1};
+  box.className='lyr';box.innerHTML='<div class="msg"><div class="spin" style="margin:10px auto 14px"></div>Recherche des paroles…</div>';
+  const r=await fetchLyrics(it);if(!P.item||P.item.id!==it.id)return;
+  if(r.err){box.innerHTML='<div class="msg">Impossible de charger les paroles.<br>Vérifie ta connexion.</div>';return}
+  if(r.none){box.innerHTML=`<div class="msg">Paroles indisponibles pour ce titre.</div>`;return}
+  if(r.synced&&r.synced.length){lyrState.lines=r.synced;box.innerHTML=r.synced.map((x,i)=>`<p data-act="lyrSeek" data-i="${i}">${x.l?esc(x.l):'♪'}</p>`).join('')+`<div class="src">Paroles · ${esc(r.src)}</div>`;syncLyrics(true)}
+  else{box.classList.add('plain');box.innerHTML=r.plain.split(/\n/).map(l=>`<p>${esc(l)||'&nbsp;'}</p>`).join('')+`<div class="src">Paroles · ${esc(r.src)} · non synchronisées</div>`}
+}
+function syncLyrics(force){
+  if(!S.lyrOpen||!lyrState||!lyrState.lines||!P.item||lyrState.id!==P.item.id)return;
+  const t=curTime()+0.25,L=lyrState.lines;let i=-1;for(let k=0;k<L.length;k++){if(L[k].t<=t)i=k;else break}
+  if(i===lyrState.cur&&!force)return;lyrState.cur=i;
+  const box=$('#npLyr'),ps=box.querySelectorAll('p');
+  ps.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i)});
+  const el=ps[Math.max(0,i)];if(el)box.scrollTo({top:el.offsetTop-box.clientHeight*.3,behavior:force?'auto':'smooth'});
+}
+setInterval(syncLyrics,250);
+function toggleLyrics(){
+  S.lyrOpen=!S.lyrOpen;$('#np').classList.toggle('lyrmode',S.lyrOpen);$('#npLyrBtn').classList.toggle('on',S.lyrOpen);
+  if(S.lyrOpen){$('#npQueue').classList.remove('show');$('#npQBtn').classList.remove('on');if(!lyrState||!P.item||lyrState.id!==P.item.id)loadLyrics();else syncLyrics(true)}
+}
 
 /* ================= init ================= */
 const hr=new Date().getHours();$('#greet').textContent=hr<5?'Bonne nuit':hr<12?'Bonjour':hr<18?'Bon après-midi':'Bonsoir';
